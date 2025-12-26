@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zlafik | Backend Developer</title>
     <meta property="og:title" content="zlafik | Backend Developer">
-    <meta property="og:description" content="Специализация: Discord боты, API, автоматизация, Python разработка">
+    <meta property="og:description" content="Специализация: Telegram Bots, FunPay Cardinal, C++/Web разработка, Discord Bots">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
@@ -16,20 +16,26 @@
             --secondary-black: #0a0a0a;
             --dark-gray: #1a1a1a;
             --medium-gray: #666666;
-            --light-gray: #cccccc;
+            --light-gray: #e0e0e0;
             --white: #ffffff;
             --accent: #ffffff;
-            --accent-glow: rgba(255, 255, 255, 0.3);
-            --blur-intensity: 15px;
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --accent-glow: rgba(255, 255, 255, 0.2);
+            --telegram-blue: #0088cc;
+            --discord-purple: #5865f2;
+            --cpp-blue: #00599c;
+            --funpay-orange: #ff6b35;
+            --blur-intensity: 20px;
+            --border-radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.4);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         html {
@@ -39,7 +45,7 @@
         body {
             background-color: var(--primary-black);
             color: var(--white);
-            line-height: 1.6;
+            line-height: 1.7;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -50,88 +56,6 @@
         
         @keyframes fadeInBody {
             to { opacity: 1; }
-        }
-        
-        /* Кастомный курсор */
-        .custom-cursor {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
-            mix-blend-mode: difference;
-        }
-        
-        .custom-cursor.hover {
-            width: 48px;
-            height: 48px;
-            background-color: transparent;
-            border: 2px solid var(--accent);
-            backdrop-filter: blur(2px);
-        }
-        
-        .custom-cursor.click {
-            transform: translate(-50%, -50%) scale(0.9);
-        }
-        
-        .cursor-trail {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            opacity: 0.3;
-            transform: translate(-50%, -50%);
-        }
-        
-        /* Предзагрузчик */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--primary-black);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
-        }
-        
-        .loading-text {
-            font-size: 1.2rem;
-            color: var(--light-gray);
-            margin-top: 20px;
-            text-align: center;
-        }
-        
-        .loading-dots {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            animation: pulse 1.4s infinite ease-in-out;
-        }
-        
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.8); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 1; }
         }
         
         /* Частицы */
@@ -152,23 +76,23 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 20px 0;
+            padding: 25px 0;
             transition: var(--transition);
             backdrop-filter: blur(var(--blur-intensity));
-            background: rgba(0, 0, 0, 0.85);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         
         header.scrolled {
-            padding: 15px 0;
+            padding: 20px 0;
             background: rgba(0, 0, 0, 0.95);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
         }
         
-        .header-content {
+        .header-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -177,64 +101,71 @@
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         
         .logo {
             position: relative;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
+            padding: 5px;
         }
         
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--light-gray) 100%);
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 800;
             color: var(--primary-black);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
         }
         
         .logo:hover .logo-icon {
             transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.2);
         }
         
         .nickname {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
         }
         
         .tagline {
-            font-size: 0.85rem;
-            color: var(--medium-gray);
-            border-left: 2px solid var(--medium-gray);
-            padding-left: 12px;
-            line-height: 1.3;
+            font-size: 0.9rem;
+            color: var(--light-gray);
+            opacity: 0.8;
+            font-weight: 400;
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple), var(--cpp-blue), var(--funpay-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         /* Навигация */
         nav {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 40px;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 35px;
             margin: 0;
             padding: 0;
         }
@@ -247,18 +178,20 @@
             color: var(--light-gray);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
-            padding: 8px 0;
+            font-size: 1rem;
+            padding: 10px 0;
             position: relative;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: 0.3px;
         }
         
         .nav-links a i {
-            font-size: 0.9rem;
-            opacity: 0.7;
+            font-size: 1rem;
+            opacity: 0.8;
+            transition: var(--transition);
         }
         
         .nav-links a:hover {
@@ -267,15 +200,17 @@
         
         .nav-links a:hover i {
             opacity: 1;
+            transform: translateY(-2px);
         }
         
         .nav-links a.active {
-            color: var(--accent);
+            color: var(--white);
             font-weight: 600;
         }
         
         .nav-links a.active i {
             opacity: 1;
+            color: var(--white);
         }
         
         .nav-links a::after {
@@ -284,9 +219,10 @@
             bottom: 0;
             left: 0;
             width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+            height: 3px;
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple));
             transition: var(--transition);
+            border-radius: 2px;
         }
         
         .nav-links a:hover::after,
@@ -297,30 +233,38 @@
         /* Мобильное меню */
         .mobile-menu-btn {
             display: none;
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            padding: 5px;
+            padding: 12px;
             z-index: 1002;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
         }
         
         .mobile-menu {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 280px;
+            width: 320px;
             height: 100vh;
             background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
             z-index: 1001;
-            padding: 80px 30px 30px;
+            padding: 100px 40px 40px;
             transition: var(--transition);
-            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 25px;
         }
         
         .mobile-menu.active {
@@ -330,20 +274,22 @@
         .mobile-menu a {
             color: var(--white);
             text-decoration: none;
-            font-size: 1.1rem;
-            padding: 12px 20px;
+            font-size: 1.2rem;
+            padding: 15px 25px;
             border-radius: var(--border-radius);
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            border: 1px solid transparent;
         }
         
         .mobile-menu a:hover,
         .mobile-menu a.active {
             background: rgba(255, 255, 255, 0.05);
-            color: var(--accent);
-            transform: translateX(5px);
+            color: var(--white);
+            transform: translateX(10px);
+            border-color: rgba(255, 255, 255, 0.1);
         }
         
         .mobile-menu-overlay {
@@ -352,7 +298,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
@@ -366,24 +312,24 @@
         
         /* Основной контент */
         .main-content {
-            padding-top: 100px;
+            padding-top: 120px;
             min-height: 100vh;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
         
         /* Секции */
         .section {
             display: none;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            min-height: 80vh;
-            padding: 80px 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            min-height: 100vh;
+            padding: 100px 0;
         }
         
         .section.active {
@@ -394,98 +340,108 @@
         
         .section-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
         
         .section-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, var(--white) 0%, var(--medium-gray) 100%);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.1;
         }
         
         .section-subtitle {
-            color: var(--medium-gray);
-            font-size: 1.1rem;
-            max-width: 600px;
+            color: var(--light-gray);
+            font-size: 1.2rem;
+            max-width: 700px;
             margin: 0 auto;
+            opacity: 0.8;
+            line-height: 1.6;
         }
         
         /* Герой секция */
         .hero {
             display: flex;
             align-items: center;
+            justify-content: center;
             min-height: 90vh;
             position: relative;
+            padding: 40px 0;
         }
         
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
+            width: 100%;
         }
         
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             line-height: 1.1;
         }
         
         .hero-title .highlight {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--light-gray) 100%);
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple), var(--cpp-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             position: relative;
             display: inline-block;
+            padding: 0 10px;
         }
         
         .hero-title .highlight::after {
             content: '';
             position: absolute;
             bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: underline 3s ease-in-out infinite;
+            left: 10px;
+            right: 10px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple), var(--cpp-blue), transparent);
+            animation: underline 4s ease-in-out infinite;
         }
         
         @keyframes underline {
-            0%, 100% { transform: scaleX(0.3); opacity: 0.5; }
+            0%, 100% { transform: scaleX(0.2); opacity: 0.3; }
             50% { transform: scaleX(1); opacity: 1; }
         }
         
         .hero-description {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: var(--light-gray);
-            margin-bottom: 40px;
-            max-width: 600px;
+            margin-bottom: 60px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.9;
+            line-height: 1.8;
         }
         
         /* Карточки профиля */
         .profile-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
         }
         
         .profile-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 30px;
             backdrop-filter: blur(var(--blur-intensity));
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
         
         .profile-card::before {
@@ -495,20 +451,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%);
+            background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.03) 50%, transparent 60%);
             opacity: 0;
             transition: var(--transition);
         }
         
         .profile-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: var(--shadow-hover);
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .profile-card:hover::before {
             opacity: 1;
-            animation: shine 2s ease-in-out infinite;
+            animation: shine 2.5s ease-in-out infinite;
         }
         
         @keyframes shine {
@@ -517,195 +474,323 @@
         }
         
         .profile-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: var(--medium-gray);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--light-gray);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            opacity: 0.9;
         }
         
         .profile-card h3 i {
-            font-size: 1rem;
-            color: var(--accent);
-        }
-        
-        .profile-content {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--white);
         }
         
-        .age-animation {
-            font-family: 'Courier New', monospace;
-            color: var(--accent);
+        .profile-content {
+            font-size: 1.4rem;
+            color: var(--white);
             font-weight: 600;
-            text-shadow: 0 0 10px var(--accent-glow);
+            line-height: 1.4;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 3px;
+            transition: var(--transition);
+        }
+        
+        .badge-telegram {
+            background: rgba(0, 136, 204, 0.15);
+            color: var(--telegram-blue);
+            border: 1px solid rgba(0, 136, 204, 0.3);
+        }
+        
+        .badge-discord {
+            background: rgba(88, 101, 242, 0.15);
+            color: var(--discord-purple);
+            border: 1px solid rgba(88, 101, 242, 0.3);
+        }
+        
+        .badge-cpp {
+            background: rgba(0, 89, 156, 0.15);
+            color: var(--cpp-blue);
+            border: 1px solid rgba(0, 89, 156, 0.3);
+        }
+        
+        .badge-funpay {
+            background: rgba(255, 107, 53, 0.15);
+            color: var(--funpay-orange);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .age-animation {
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            color: var(--white);
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             letter-spacing: 2px;
+            font-size: 1.4rem;
         }
         
         /* Основной проект */
         .main-project-showcase {
-            max-width: 900px;
-            margin: 60px auto;
+            max-width: 1000px;
+            margin: 80px auto;
             position: relative;
         }
         
         .main-project-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: var(--border-radius);
-            padding: 40px;
+            padding: 60px 50px;
             backdrop-filter: blur(var(--blur-intensity));
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .main-project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(0, 136, 204, 0.05) 0%, 
+                rgba(88, 101, 242, 0.05) 50%, 
+                rgba(0, 89, 156, 0.05) 100%);
+            z-index: -1;
         }
         
         .project-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--accent);
-            color: var(--primary-black);
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple));
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
         }
         
         .project-icon {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 20px;
+            font-size: 4rem;
+            color: var(--telegram-blue);
+            margin-bottom: 30px;
+            opacity: 0.9;
+            text-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
         }
         
         .main-project-card h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            font-weight: 700;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+            line-height: 1.2;
         }
         
         .main-project-card p {
             color: var(--light-gray);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            max-width: 600px;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.9;
         }
         
         .tech-stack {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 50px;
         }
         
         .tech-tag {
-            background: rgba(255, 255, 255, 0.07);
-            color: var(--light-gray);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        .tech-tag.telegram {
+            background: rgba(0, 136, 204, 0.1);
+            border-color: rgba(0, 136, 204, 0.3);
+        }
+        
+        .tech-tag.discord {
+            background: rgba(88, 101, 242, 0.1);
+            border-color: rgba(88, 101, 242, 0.3);
+        }
+        
+        .tech-tag.cpp {
+            background: rgba(0, 89, 156, 0.1);
+            border-color: rgba(0, 89, 156, 0.3);
+        }
+        
+        .tech-tag.funpay {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: rgba(255, 107, 53, 0.3);
         }
         
         .tech-tag:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.25);
         }
         
         /* Принципы */
         .principles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
         }
         
         .principle-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 35px 30px;
             transition: var(--transition);
+            height: 100%;
         }
         
         .principle-card:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow);
         }
         
         .principle-card h4 {
-            color: var(--accent);
-            margin-bottom: 10px;
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            font-weight: 600;
+        }
+        
+        .principle-card p {
+            color: var(--light-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         /* Проекты */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
         
         .project-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 40px 35px;
             transition: var(--transition);
             height: 100%;
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--telegram-blue), var(--discord-purple));
+            opacity: 0;
+            transition: var(--transition);
         }
         
         .project-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-15px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: var(--shadow-hover);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
         }
         
         .project-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin-bottom: 30px;
         }
         
         .project-icon-small {
-            font-size: 1.8rem;
-            color: var(--accent);
+            font-size: 2.2rem;
+            opacity: 0.9;
+        }
+        
+        .project-icon-small.telegram {
+            color: var(--telegram-blue);
+            text-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
+        }
+        
+        .project-icon-small.funpay {
+            color: var(--funpay-orange);
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
         }
         
         .project-title {
-            font-size: 1.5rem;
-            font-weight: 600;
+            font-size: 1.8rem;
+            font-weight: 700;
             flex: 1;
+            line-height: 1.2;
         }
         
         .project-description {
             color: var(--light-gray);
-            margin-bottom: 25px;
+            margin-bottom: 35px;
             flex: 1;
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         .project-features {
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
         
         .project-features h4 {
-            color: var(--medium-gray);
-            margin-bottom: 12px;
-            font-size: 1rem;
+            color: var(--light-gray);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.8;
         }
         
         .features-list {
@@ -714,52 +799,59 @@
         
         .features-list li {
             color: var(--light-gray);
-            margin-bottom: 8px;
-            padding-left: 20px;
+            margin-bottom: 15px;
+            padding-left: 25px;
             position: relative;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
         .features-list li::before {
-            content: '›';
+            content: '→';
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--telegram-blue);
             font-weight: bold;
+            opacity: 0.8;
         }
         
         /* Навыки */
         .skills-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
         
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
         }
         
         .skill-category {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 35px 30px;
             transition: var(--transition);
+            height: 100%;
         }
         
         .skill-category:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow);
         }
         
         .skill-category h3 {
-            color: var(--accent);
-            margin-bottom: 15px;
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            font-weight: 600;
         }
         
         .skill-list {
@@ -768,61 +860,89 @@
         
         .skill-list li {
             color: var(--light-gray);
-            margin-bottom: 8px;
-            padding-left: 20px;
+            margin-bottom: 15px;
+            padding-left: 25px;
             position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
         
         .skill-list li::before {
             content: '•';
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--telegram-blue);
+            font-size: 1.5rem;
+            opacity: 0.8;
         }
         
         /* Контакты */
         .contact-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
         
         .contact-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            padding: 25px;
+            padding: 40px 30px;
             text-align: center;
             transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .contact-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-15px);
+            border-color: rgba(255, 255, 255, 0.15);
             background: rgba(255, 255, 255, 0.05);
+            box-shadow: var(--shadow-hover);
         }
         
         .contact-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 15px;
+            font-size: 3rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .contact-icon.telegram {
+            color: var(--telegram-blue);
+            text-shadow: 0 0 20px rgba(0, 136, 204, 0.3);
+        }
+        
+        .contact-icon.discord {
+            color: var(--discord-purple);
+            text-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+        }
+        
+        .contact-icon.email {
+            color: var(--white);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
         
         .contact-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
         
         .contact-card p {
-            color: var(--medium-gray);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
+            color: var(--light-gray);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            line-height: 1.6;
+            flex: 1;
         }
         
         /* Кнопки */
@@ -830,11 +950,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 14px 30px;
+            gap: 12px;
+            padding: 18px 40px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-decoration: none;
             transition: var(--transition);
             border: none;
@@ -842,6 +962,7 @@
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(var(--blur-intensity));
+            letter-spacing: 0.5px;
         }
         
         .btn::before {
@@ -858,165 +979,172 @@
         
         .btn:hover::before {
             opacity: 1;
-            animation: shine 1.5s ease-in-out infinite;
+            animation: shine 1.8s ease-in-out infinite;
         }
         
         .btn-primary {
-            background: rgba(255, 255, 255, 0.1);
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple));
             color: var(--white);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 136, 204, 0.4);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
         .btn-secondary {
             background: rgba(0, 0, 0, 0.3);
             color: var(--white);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
         
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.25);
         }
         
         .btn-group {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         
         /* Форма обратной связи */
         .contact-form {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: var(--border-radius);
-            padding: 40px;
-            max-width: 600px;
+            padding: 50px 40px;
+            max-width: 700px;
             margin: 0 auto;
+            box-shadow: var(--shadow);
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: var(--light-gray);
             font-weight: 500;
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
         .form-control {
             width: 100%;
-            padding: 14px 18px;
+            padding: 18px 22px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
             color: var(--white);
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: var(--transition);
+            font-family: inherit;
         }
         
         .form-control:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent-glow);
+            border-color: var(--telegram-blue);
+            box-shadow: 0 0 0 3px rgba(0, 136, 204, 0.2);
+            background: rgba(255, 255, 255, 0.08);
         }
         
         textarea.form-control {
-            min-height: 150px;
+            min-height: 180px;
             resize: vertical;
+            line-height: 1.6;
         }
         
         /* Футер */
         footer {
             background: rgba(0, 0, 0, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px 0;
-            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 60px 0 40px;
+            margin-top: 100px;
         }
         
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
             text-align: center;
         }
         
         .footer-logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
             display: inline-block;
+            background: linear-gradient(90deg, var(--telegram-blue), var(--discord-purple), var(--cpp-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
+            gap: 30px;
+            margin: 30px 0;
             flex-wrap: wrap;
         }
         
         .footer-links a {
-            color: var(--medium-gray);
+            color: var(--light-gray);
             text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 20px;
+            border-radius: 25px;
             transition: var(--transition);
+            opacity: 0.8;
         }
         
         .footer-links a:hover {
-            color: var(--accent);
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+            opacity: 1;
+            transform: translateY(-3px);
         }
         
         .footer-bottom {
             color: var(--medium-gray);
-            font-size: 0.9rem;
-            margin-top: 30px;
-        }
-        
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--light-gray);
+            font-size: 1rem;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            opacity: 0.7;
         }
         
         /* Уведомления */
         .notification {
             position: fixed;
-            bottom: 30px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
             background: rgba(255, 255, 255, 0.95);
             color: var(--primary-black);
-            padding: 15px 25px;
+            padding: 20px 35px;
             border-radius: 50px;
             z-index: 1000;
             opacity: 0;
             transition: var(--transition);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 500;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            gap: 15px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
         
         .notification.show {
@@ -1027,15 +1155,15 @@
         /* Кнопка наверх */
         #scrollToTop {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 136, 204, 0.12);
+            border: 1px solid rgba(0, 136, 204, 0.25);
             border-radius: 50%;
             color: var(--white);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             display: none;
             justify-content: center;
             align-items: center;
@@ -1045,36 +1173,37 @@
         }
         
         #scrollToTop:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px) scale(1.1);
-        }
-        
-        /* Переключатель темы */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--white);
-            z-index: 1001;
-            transition: var(--transition);
-            backdrop-filter: blur(var(--blur-intensity));
-        }
-        
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(30deg);
+            background: rgba(0, 136, 204, 0.2);
+            transform: translateY(-8px) scale(1.1);
+            border-color: rgba(0, 136, 204, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
         
         /* Адаптивность */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .header-container,
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 25px;
+            }
+            
             .hero-title {
                 font-size: 3rem;
             }
@@ -1082,17 +1211,17 @@
             .section-title {
                 font-size: 2.5rem;
             }
+            
+            .main-project-card {
+                padding: 50px 40px;
+            }
+            
+            .main-project-card h2 {
+                font-size: 2.4rem;
+            }
         }
         
         @media (max-width: 768px) {
-            .custom-cursor {
-                display: none;
-            }
-            
-            body {
-                cursor: auto;
-            }
-            
             .mobile-menu-btn {
                 display: block;
             }
@@ -1101,12 +1230,17 @@
                 display: none;
             }
             
+            .header-container,
+            .container {
+                padding: 0 20px;
+            }
+            
             .hero-title {
                 font-size: 2.5rem;
             }
             
             .hero-description {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .section-title {
@@ -1114,11 +1248,11 @@
             }
             
             .section {
-                padding: 60px 0;
+                padding: 80px 0;
             }
             
             .main-content {
-                padding-top: 80px;
+                padding-top: 100px;
             }
             
             .profile-grid,
@@ -1129,41 +1263,46 @@
             }
             
             .main-project-card {
-                padding: 30px 20px;
+                padding: 40px 30px;
             }
             
             .main-project-card h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+            
+            .main-project-card p {
+                font-size: 1.1rem;
             }
             
             .btn-group {
                 flex-direction: column;
+                align-items: center;
             }
             
             .btn {
                 width: 100%;
-            }
-            
-            .theme-toggle {
-                top: 15px;
-                left: 15px;
-                width: 40px;
-                height: 40px;
+                max-width: 350px;
             }
             
             #scrollToTop {
                 bottom: 20px;
                 right: 20px;
-                width: 45px;
-                height: 45px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
             
             .contact-form {
-                padding: 30px 20px;
+                padding: 40px 30px;
+            }
+            
+            .mobile-menu {
+                width: 300px;
+                padding: 90px 30px 30px;
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
             .hero-title {
                 font-size: 2rem;
             }
@@ -1173,64 +1312,80 @@
             }
             
             .nickname {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             
             .tagline {
                 font-size: 0.8rem;
             }
             
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+            
+            .main-project-card {
+                padding: 30px 20px;
+            }
+            
             .main-project-card h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             
             .profile-card,
             .project-card,
             .contact-card {
-                padding: 20px;
+                padding: 30px 20px;
             }
             
             .notification {
                 width: 90%;
                 text-align: center;
-                padding: 12px 20px;
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .footer-links a {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+            
+            .tech-tag {
+                padding: 10px 20px;
+                font-size: 0.9rem;
             }
         }
         
-        /* Анимации для AOS */
-        [data-aos] {
-            pointer-events: none;
-        }
-        
-        [data-aos].aos-animate {
-            pointer-events: auto;
+        @media (max-width: 400px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            
+            .profile-content {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 16px 30px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Предзагрузчик -->
-    <div id="preloader">
-        <div style="text-align: center;">
-            <div class="spinner"></div>
-            <div class="loading-text">Загрузка портфолио</div>
-            <div class="loading-dots">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Кастомный курсор -->
-    <div class="custom-cursor"></div>
-    
     <!-- Частицы -->
     <div id="particles-js"></div>
-    
-    <!-- Переключатель темы -->
-    <div class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </div>
     
     <!-- Кнопка наверх -->
     <button id="scrollToTop">
@@ -1242,13 +1397,13 @@
     
     <!-- Хедер -->
     <header id="header">
-        <div class="header-content">
+        <div class="header-container">
             <div class="logo-area">
-                <a href="#home" class="logo">
+                <a href="#home" class="logo" data-section="home">
                     <div class="logo-icon">Z</div>
                     <div>
                         <div class="nickname">zlafik</div>
-                        <div class="tagline">Backend Developer</div>
+                        <div class="tagline">Telegram Bots | FunPay Cardinal | C++/Web</div>
                     </div>
                 </a>
             </div>
@@ -1277,34 +1432,35 @@
         <a href="#projects" data-section="projects"><i class="fas fa-code"></i> Проекты</a>
         <a href="#skills" data-section="skills"><i class="fas fa-cogs"></i> Навыки</a>
         <a href="#contact" data-section="contact"><i class="fas fa-envelope"></i> Контакты</a>
-        <div style="margin-top: auto; padding: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05);">
-            <div class="tagline" style="border-left: none; text-align: center; font-size: 0.9rem;">
-                Backend Developer<br>
-                Discord Bots • API • Automation
+        <div style="margin-top: auto; padding: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+            <div class="tagline" style="border-left: none; font-size: 0.95rem; opacity: 0.8;">
+                Telegram Bots • FunPay Cardinal<br>
+                C++/Web • Discord Bots
             </div>
         </div>
     </div>
     
     <!-- Основной контент -->
     <main class="main-content">
-        <div class="container">
-            <!-- Главная страница -->
-            <section id="home" class="section active">
+        <!-- Главная страница -->
+        <section id="home" class="section active">
+            <div class="container">
                 <div class="hero">
                     <div class="hero-content" data-aos="fade-up" data-aos-delay="100">
                         <h1 class="hero-title">
                             Привет, я <span class="highlight">zlafik</span>
                         </h1>
                         <p class="hero-description">
-                            Backend разработчик, специализируюсь на создании Discord ботов, API и систем автоматизации. 
-                            Фокус на качественный код и эффективные решения.
+                            Backend разработчик, специализируюсь на создании Telegram ботов, 
+                            систем для FunPay Cardinal, C++/Web разработке и Discord ботах. 
+                            Фокус на качественный код, производительность и эффективные решения.
                         </p>
                         
                         <div class="profile-grid" data-aos="fade-up" data-aos-delay="200">
                             <div class="profile-card">
                                 <h3><i class="fas fa-user"></i> Профиль</h3>
                                 <div class="profile-content">
-                                    ID: zlafik / Рома<br>
+                                    zlafik / Рома<br>
                                     <span class="age-animation" id="ageCounter">00:00:00:00</span>
                                 </div>
                             </div>
@@ -1312,21 +1468,26 @@
                             <div class="profile-card">
                                 <h3><i class="fas fa-cogs"></i> Специализация</h3>
                                 <div class="profile-content">
-                                    Backend • Automation • API
+                                    <span class="tech-badge badge-telegram">Telegram Bots</span>
+                                    <span class="tech-badge badge-funpay">FunPay Cardinal</span>
+                                    <span class="tech-badge badge-cpp">C++/Web</span>
+                                    <span class="tech-badge badge-discord">Discord Bots</span>
                                 </div>
                             </div>
                             
                             <div class="profile-card">
                                 <h3><i class="fas fa-calendar-alt"></i> Опыт</h3>
                                 <div class="profile-content">
-                                    С 2024 года
+                                    С 2024 года<br>
+                                    <small style="font-size: 1rem; opacity: 0.8;">Современные технологии</small>
                                 </div>
                             </div>
                             
                             <div class="profile-card">
-                                <h3><i class="fas fa-directions"></i> Направление</h3>
-                                <div class="profile-content">
-                                    Discord Bots • Веб-API • Скрипты
+                                <h3><i class="fas fa-directions"></i> Технологии</h3>
+                                <div class="profile-content" style="font-size: 1.2rem;">
+                                    Python • C++ • JavaScript<br>
+                                    API • WebSocket • Databases
                                 </div>
                             </div>
                         </div>
@@ -1334,30 +1495,31 @@
                         <!-- Основной проект -->
                         <div class="main-project-showcase" data-aos="zoom-in" data-aos-delay="300">
                             <div class="main-project-card">
-                                <div class="project-badge">MAIN PROJECT</div>
+                                <div class="project-badge">Основной проект</div>
                                 <div class="project-icon">
-                                    <i class="fab fa-discord"></i>
+                                    <i class="fab fa-telegram"></i>
                                 </div>
-                                <h2>Discord Server Cloner V3</h2>
+                                <h2>Telegram Bot Platform</h2>
                                 <p>
-                                    Мощный инструмент для полного клонирования Discord серверов. 
-                                    Сохраняет иерархию, порядок ролей и каналов с максимальной точностью. 
-                                    Стабильная работа, обработка ошибок и поддержка всех типов каналов.
+                                    Мощная платформа для создания и управления Telegram ботами с модульной архитектурой. 
+                                    Поддержка платежных систем, админ-панель, система плагинов и масштабируемая базовая структура. 
+                                    Интеграция с базами данных и высокопроизводительная обработка сообщений.
                                 </p>
                                 
                                 <div class="tech-stack">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Discord API</span>
-                                    <span class="tech-tag">AsyncIO</span>
-                                    <span class="tech-tag">aiohttp</span>
-                                    <span class="tech-tag">WebSocket</span>
+                                    <span class="tech-tag telegram">Python</span>
+                                    <span class="tech-tag telegram">Telegram API</span>
+                                    <span class="tech-tag discord">Aiogram</span>
+                                    <span class="tech-tag cpp">PostgreSQL</span>
+                                    <span class="tech-tag discord">Redis</span>
+                                    <span class="tech-tag telegram">Docker</span>
                                 </div>
                                 
                                 <div class="btn-group">
-                                    <a href="https://github.com/zlafik1/discord-server-cloner" target="_blank" class="btn btn-primary">
+                                    <a href="https://github.com/zlafik1/telegram-bot-platform" target="_blank" class="btn btn-primary">
                                         <i class="fab fa-github"></i> GitHub репозиторий
                                     </a>
-                                    <a href="https://github.com/zlafik1/discord-server-cloner/archive/refs/heads/main.zip" class="btn btn-secondary" id="downloadMain">
+                                    <a href="https://github.com/zlafik1/telegram-bot-platform/archive/refs/heads/main.zip" class="btn btn-secondary" id="downloadMain">
                                         <i class="fas fa-download"></i> Скачать проект
                                     </a>
                                 </div>
@@ -1368,71 +1530,78 @@
                         <div class="principles-grid" data-aos="fade-up" data-aos-delay="400">
                             <div class="principle-card">
                                 <h4><i class="fas fa-bullseye"></i> Фокус на результат</h4>
-                                <p>Минимум диалогов, максимум качественного кода и рабочих решений.</p>
+                                <p>Минимум диалогов, максимум качественного кода и рабочих решений. Каждый проект — выверенная система с оптимальной архитектурой.</p>
                             </div>
                             
                             <div class="principle-card">
                                 <h4><i class="fas fa-shield-alt"></i> Профессионализм</h4>
-                                <p>Игнорирование провокаций и конфликтов. Только деловое общение.</p>
+                                <p>Игнорирование провокаций и конфликтов. Только деловое общение по существу задачи и четкие сроки выполнения.</p>
                             </div>
                             
                             <div class="principle-card">
                                 <h4><i class="fas fa-user-secret"></i> Самостоятельность</h4>
-                                <p>Работаю исключительно один, полностью контролирую качество кода.</p>
+                                <p>Работаю исключительно один, полностью контролирую качество кода на каждом этапе. От проектирования до деплоя.</p>
                             </div>
                             
                             <div class="principle-card">
                                 <h4><i class="fas fa-filter"></i> Жесткий отбор</h4>
-                                <p>Непрофессионализм = моментальный игнор. Ценю своё время.</p>
+                                <p>Непрофессионализм = моментальный игнор. Ценю своё время и работаю только с серьёзными задачами и клиентами.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Проекты -->
-            <section id="projects" class="section">
+            </div>
+        </section>
+        
+        <!-- Проекты -->
+        <section id="projects" class="section">
+            <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">Мои проекты</h2>
-                    <p class="section-subtitle">Ключевые разработки, которые демонстрируют мой подход к созданию качественного ПО</p>
+                    <p class="section-subtitle">Ключевые разработки в области Telegram ботов, FunPay Cardinal, C++/Web и Discord ботов</p>
                 </div>
                 
                 <div class="projects-grid">
                     <div class="project-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="project-header">
-                            <div class="project-icon-small">
-                                <i class="fab fa-discord"></i>
+                            <div class="project-icon-small telegram">
+                                <i class="fab fa-telegram"></i>
                             </div>
-                            <h3 class="project-title">Discord Server Cloner V3</h3>
+                            <h3 class="project-title">Telegram Bot Platform</h3>
                         </div>
                         
                         <p class="project-description">
-                            Продвинутый инструмент для полного клонирования структуры Discord серверов 
-                            с сохранением всей иерархии и настроек.
+                            Полноценная платформа для создания и управления Telegram ботами с модульной архитектурой.
+                            Поддержка платежей через различные системы, админ-панель с статистикой,
+                            система плагинов и масштабируемая базовая структура. Оптимизирована для высокой нагрузки.
                         </p>
                         
                         <div class="project-features">
                             <h4>Основные возможности:</h4>
                             <ul class="features-list">
-                                <li>Полное копирование структуры сервера</li>
-                                <li>Сохранение порядка ролей и каналов</li>
-                                <li>Обработка ошибок и автоматические повторы</li>
-                                <li>Поддержка всех типов каналов</li>
-                                <li>Асинхронная архитектура</li>
+                                <li>Модульная архитектура для легкого расширения</li>
+                                <li>Интеграция с платежными системами (ЮKassa, PayPal)</li>
+                                <li>Админ-панель с детальной статистикой в реальном времени</li>
+                                <li>Система логов и мониторинга производительности</li>
+                                <li>Поддержка PostgreSQL с connection pooling</li>
+                                <li>Кэширование через Redis для высокой скорости</li>
                             </ul>
                         </div>
                         
                         <div class="tech-stack" style="justify-content: start; margin-top: auto;">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Discord.py</span>
-                            <span class="tech-tag">AsyncIO</span>
+                            <span class="tech-tag telegram">Python</span>
+                            <span class="tech-tag telegram">Aiogram</span>
+                            <span class="tech-tag cpp">PostgreSQL</span>
+                            <span class="tech-tag discord">Redis</span>
+                            <span class="tech-tag telegram">Docker</span>
+                            <span class="tech-tag cpp">REST API</span>
                         </div>
                         
-                        <div class="btn-group" style="justify-content: start; margin-top: 20px;">
-                            <a href="https://github.com/zlafik1/discord-server-cloner" target="_blank" class="btn btn-primary">
+                        <div class="btn-group" style="justify-content: start; margin-top: 30px;">
+                            <a href="https://github.com/zlafik1/telegram-bot-platform" target="_blank" class="btn btn-primary">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
-                            <a href="https://github.com/zlafik1/discord-server-cloner/archive/refs/heads/main.zip" class="btn btn-secondary">
+                            <a href="https://github.com/zlafik1/telegram-bot-platform/archive/refs/heads/main.zip" class="btn btn-secondary">
                                 <i class="fas fa-download"></i> Скачать
                             </a>
                         </div>
@@ -1440,104 +1609,116 @@
                     
                     <div class="project-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="project-header">
-                            <div class="project-icon-small">
-                                <i class="fas fa-check-circle"></i>
+                            <div class="project-icon-small funpay">
+                                <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <h3 class="project-title">Playerok-Checker</h3>
+                            <h3 class="project-title">FunPay Cardinal System</h3>
                         </div>
                         
                         <p class="project-description">
-                            Высокопроизводительный чекер аккаунтов для платформы Playerok 
-                            с поддержкой многопоточности и прокси.
+                            Автоматизированная система для работы с FunPay Cardinal, включающая 
+                            обработку заказов, автоматические ответы, управление товарами и 
+                            интеграцию с внешними сервисами. Оптимизирована для высокой нагрузки 
+                            и круглосуточной работы с минимальным вмешательством.
                         </p>
                         
                         <div class="project-features">
                             <h4>Основные возможности:</h4>
                             <ul class="features-list">
-                                <li>Многопоточная проверка аккаунтов</li>
-                                <li>Поддержка прокси (HTTP/SOCKS)</li>
-                                <li>Гибкая настройка параметров</li>
-                                <li>Детальная статистика выполнения</li>
-                                <li>Экспорт результатов</li>
+                                <li>Автоматическая обработка заказов в реальном времени</li>
+                                <li>Полная интеграция с FunPay API и WebSocket</li>
+                                <li>Управление товарами и остатками с автоматическим обновлением</li>
+                                <li>Интеллектуальные автоматические ответы покупателям</li>
+                                <li>Система уведомлений (Telegram, Email)</li>
+                                <li>Детальная статистика продаж и аналитика</li>
                             </ul>
                         </div>
                         
                         <div class="tech-stack" style="justify-content: start; margin-top: auto;">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Requests</span>
-                            <span class="tech-tag">Threading</span>
-                            <span class="tech-tag">Proxy</span>
+                            <span class="tech-tag cpp">C++</span>
+                            <span class="tech-tag telegram">Python</span>
+                            <span class="tech-tag funpay">FunPay API</span>
+                            <span class="tech-tag cpp">SQLite</span>
+                            <span class="tech-tag telegram">WebSockets</span>
+                            <span class="tech-tag cpp">HTTP Client</span>
                         </div>
                         
-                        <div class="btn-group" style="justify-content: start; margin-top: 20px;">
-                            <a href="https://github.com/zlafik1/Playerok-Checker" target="_blank" class="btn btn-primary">
+                        <div class="btn-group" style="justify-content: start; margin-top: 30px;">
+                            <a href="https://github.com/zlafik1/funpay-cardinal" target="_blank" class="btn btn-primary">
                                 <i class="fab fa-github"></i> GitHub
                             </a>
-                            <a href="https://github.com/zlafik1/Playerok-Checker/archive/refs/heads/main.zip" class="btn btn-secondary">
+                            <a href="https://github.com/zlafik1/funpay-cardinal/archive/refs/heads/main.zip" class="btn btn-secondary">
                                 <i class="fas fa-download"></i> Скачать
                             </a>
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Навыки -->
-            <section id="skills" class="section">
+            </div>
+        </section>
+        
+        <!-- Навыки -->
+        <section id="skills" class="section">
+            <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">Навыки & Технологии</h2>
-                    <p class="section-subtitle">Инструменты и технологии, которые я использую в своей работе</p>
+                    <p class="section-subtitle">Инструменты и технологии для Telegram ботов, FunPay Cardinal, C++/Web и Discord разработки</p>
                 </div>
                 
                 <div class="skills-container">
                     <div class="skills-grid">
                         <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
-                            <h3><i class="fas fa-code"></i> Языки программирования</h3>
+                            <h3><i class="fas fa-code"></i> Языки & Основные технологии</h3>
                             <ul class="skill-list">
-                                <li>Python (Advanced)</li>
-                                <li>JavaScript (Intermediate)</li>
-                                <li>SQL (Intermediate)</li>
-                                <li>HTML/CSS (Intermediate)</li>
+                                <li><strong>C++</strong> — разработка высокопроизводительных систем, алгоритмы</li>
+                                <li><strong>Python</strong> — бэкенд, боты, автоматизация, скрипты</li>
+                                <li><strong>Web (HTML/CSS/JS)</strong> — интерфейсы, интеграции, frontend</li>
+                                <li><strong>SQL</strong> — базы данных, оптимизация запросов</li>
                             </ul>
                         </div>
                         
                         <div class="skill-category" data-aos="fade-up" data-aos-delay="150">
-                            <h3><i class="fas fa-server"></i> Backend & API</h3>
+                            <h3><i class="fas fa-robot"></i> Боты & Автоматизация</h3>
                             <ul class="skill-list">
-                                <li>Discord API / discord.py</li>
-                                <li>REST API Development</li>
-                                <li>WebSocket / Real-time</li>
-                                <li>AsyncIO / Asyncio</li>
-                                <li>aiohttp / Requests</li>
+                                <li>Telegram Bots (Aiogram, python-telegram-bot, Telebot)</li>
+                                <li>Discord Bots (discord.py, discord.js, библиотеки)</li>
+                                <li>FunPay Cardinal Integration & API</li>
+                                <li>REST API Development & Integration</li>
+                                <li>Web Scraping & Data Parsing</li>
+                                <li>Automation Scripts & Schedulers</li>
                             </ul>
                         </div>
                         
                         <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
-                            <h3><i class="fas fa-tools"></i> Инструменты & Библиотеки</h3>
+                            <h3><i class="fas fa-server"></i> Backend & Инфраструктура</h3>
                             <ul class="skill-list">
-                                <li>Git & GitHub</li>
-                                <li>Multithreading</li>
-                                <li>Proxy Integration</li>
-                                <li>Data Parsing</li>
-                                <li>Automation Scripts</li>
+                                <li>REST API Development (FastAPI, Flask, Express)</li>
+                                <li>Database Design (PostgreSQL, SQLite, Redis)</li>
+                                <li>Redis для кэширования и сессий</li>
+                                <li>Docker & Containerization</li>
+                                <li>WebSocket / Real-time коммуникация</li>
+                                <li>AsyncIO / Multithreading / Multiprocessing</li>
                             </ul>
                         </div>
                         
                         <div class="skill-category" data-aos="fade-up" data-aos-delay="250">
-                            <h3><i class="fas fa-cogs"></i> Дополнительные навыки</h3>
+                            <h3><i class="fas fa-tools"></i> Инструменты & Дополнительно</h3>
                             <ul class="skill-list">
-                                <li>Web Scraping</li>
-                                <li>Bot Development</li>
-                                <li>System Automation</li>
-                                <li>Error Handling</li>
-                                <li>Performance Optimization</li>
+                                <li>Git & GitHub для контроля версий</li>
+                                <li>Payment System Integration (ЮKassa, PayPal)</li>
+                                <li>System Architecture Design & Patterns</li>
+                                <li>Performance Optimization & Profiling</li>
+                                <li>Error Handling & Structured Logging</li>
+                                <li>Problem Solving & Debugging complex issues</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Контакты -->
-            <section id="contact" class="section">
+            </div>
+        </section>
+        
+        <!-- Контакты -->
+        <section id="contact" class="section">
+            <div class="container">
                 <div class="section-header" data-aos="fade-up">
                     <h2 class="section-title">Свяжитесь со мной</h2>
                     <p class="section-subtitle">Выберите удобный способ для связи или отправьте сообщение через форму</p>
@@ -1546,33 +1727,33 @@
                 <div class="contact-container">
                     <div class="contact-grid" data-aos="fade-up" data-aos-delay="100">
                         <div class="contact-card">
-                            <div class="contact-icon">
+                            <div class="contact-icon telegram">
                                 <i class="fab fa-telegram"></i>
                             </div>
                             <h3>Telegram</h3>
-                            <p>Быстрая связь через Telegram</p>
+                            <p>Быстрая связь через Telegram для оперативного обсуждения проектов и консультаций</p>
                             <a href="https://t.me/zlafik" target="_blank" class="btn btn-primary">
                                 <i class="fab fa-telegram"></i> @zlafik
                             </a>
                         </div>
                         
                         <div class="contact-card">
-                            <div class="contact-icon">
+                            <div class="contact-icon discord">
                                 <i class="fab fa-discord"></i>
                             </div>
                             <h3>Discord</h3>
-                            <p>Общение в Discord</p>
+                            <p>Общение в Discord для технических обсуждений, код-ревью и консультаций</p>
                             <button class="btn btn-primary" id="copyDiscord">
                                 <i class="fab fa-discord"></i> zlafik
                             </button>
                         </div>
                         
                         <div class="contact-card">
-                            <div class="contact-icon">
+                            <div class="contact-icon email">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <h3>Email</h3>
-                            <p>Для деловой переписки</p>
+                            <p>Для деловой переписки, коммерческих предложений, ТЗ и документов</p>
                             <button class="btn btn-primary" id="copyEmail">
                                 <i class="fas fa-envelope"></i> FendiHan7765@gmail.com
                             </button>
@@ -1581,36 +1762,36 @@
                     
                     <!-- Форма обратной связи -->
                     <div class="contact-form" data-aos="fade-up" data-aos-delay="200">
-                        <h3 style="text-align: center; margin-bottom: 30px; font-size: 1.5rem;">Отправить сообщение</h3>
+                        <h3 style="text-align: center; margin-bottom: 40px; font-size: 1.8rem; font-weight: 700;">Отправить сообщение</h3>
                         <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Ваше имя *</label>
-                                <input type="text" id="name" class="form-control" required>
+                                <input type="text" id="name" class="form-control" placeholder="Введите ваше имя" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="email">Ваш email *</label>
-                                <input type="email" id="email" class="form-control" required>
+                                <input type="email" id="email" class="form-control" placeholder="Введите ваш email" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="subject">Тема сообщения</label>
-                                <input type="text" id="subject" class="form-control">
+                                <input type="text" id="subject" class="form-control" placeholder="Введите тему сообщения">
                             </div>
                             
                             <div class="form-group">
                                 <label for="message">Сообщение *</label>
-                                <textarea id="message" class="form-control" required></textarea>
+                                <textarea id="message" class="form-control" placeholder="Опишите ваш проект или вопрос..." required></textarea>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 20px;">
                                 <i class="fas fa-paper-plane"></i> Отправить сообщение
                             </button>
                         </form>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
     
     <!-- Футер -->
@@ -1625,23 +1806,9 @@
                 <a href="#contact" data-section="contact">Контакты</a>
             </div>
             
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-eye"></i>
-                    <span>Посещения: <span id="visitCount">1</span></span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-code"></i>
-                    <span>Проектов: 2</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-clock"></i>
-                    <span>Опыт: с 2024</span>
-                </div>
-            </div>
-            
             <div class="footer-bottom">
-                &copy; 2024 zlafik. Все права защищены.
+                &copy; 2024 zlafik. Все права защищены.<br>
+                Telegram Bots • FunPay Cardinal • C++/Web • Discord Bots
             </div>
         </div>
     </footer>
@@ -1654,20 +1821,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Инициализация AOS
             AOS.init({
-                duration: 800,
+                duration: 1000,
                 once: false,
-                offset: 100,
-                easing: 'ease-out-cubic'
+                offset: 120,
+                easing: 'ease-out-cubic',
+                delay: 0
             });
             
             // Частицы
             particlesJS('particles-js', {
                 particles: {
                     number: { 
-                        value: 80, 
+                        value: 70, 
                         density: { 
                             enable: true, 
-                            value_area: 800 
+                            value_area: 1000 
                         } 
                     },
                     color: { 
@@ -1677,16 +1845,16 @@
                         type: "circle" 
                     },
                     opacity: { 
-                        value: 0.1, 
+                        value: 0.08, 
                         random: true, 
                         anim: { 
                             enable: true, 
                             speed: 1, 
-                            opacity_min: 0.05 
+                            opacity_min: 0.03 
                         } 
                     },
                     size: { 
-                        value: 2, 
+                        value: 2.5, 
                         random: true, 
                         anim: { 
                             enable: true, 
@@ -1696,14 +1864,14 @@
                     },
                     line_linked: { 
                         enable: true, 
-                        distance: 150, 
+                        distance: 180, 
                         color: "#ffffff", 
-                        opacity: 0.1, 
+                        opacity: 0.06, 
                         width: 1 
                     },
                     move: { 
                         enable: true, 
-                        speed: 1, 
+                        speed: 1.2, 
                         direction: "none", 
                         random: true, 
                         straight: false, 
@@ -1745,45 +1913,6 @@
                 counterInterval = setInterval(updateCounter, 50);
             }, 1000);
             
-            // Кастомный курсор
-            const cursor = document.querySelector('.custom-cursor');
-            let mouseX = 0, mouseY = 0;
-            let cursorX = 0, cursorY = 0;
-            
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            function updateCursor() {
-                cursorX += (mouseX - cursorX) * 0.15;
-                cursorY += (mouseY - cursorY) * 0.15;
-                
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-                
-                requestAnimationFrame(updateCursor);
-            }
-            
-            updateCursor();
-            
-            document.querySelectorAll('a, button, .btn, .theme-toggle, #scrollToTop').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursor.classList.add('hover');
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('hover');
-                });
-                
-                el.addEventListener('mousedown', () => {
-                    cursor.classList.add('click');
-                });
-                
-                el.addEventListener('mouseup', () => {
-                    cursor.classList.remove('click');
-                });
-            });
-            
             // Навигация
             function updateActiveNav() {
                 const sections = document.querySelectorAll('.section');
@@ -1791,7 +1920,7 @@
                 let currentSection = '';
                 
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 100;
+                    const sectionTop = section.offsetTop - 120;
                     const sectionHeight = section.clientHeight;
                     
                     if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
@@ -1808,7 +1937,7 @@
             }
             
             // Плавный скролл и переключение секций
-            document.querySelectorAll('a[data-section], .footer-links a').forEach(link => {
+            document.querySelectorAll('a[data-section], .footer-links a, .logo').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
@@ -1821,7 +1950,7 @@
                         
                         // Плавный скролл
                         window.scrollTo({
-                            top: targetSection.offsetTop - 80,
+                            top: targetSection.offsetTop - 100,
                             behavior: 'smooth'
                         });
                         
@@ -1829,7 +1958,12 @@
                         document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(item => {
                             item.classList.remove('active');
                         });
-                        this.classList.add('active');
+                        
+                        // Найти соответствующую ссылку в меню
+                        const menuLink = document.querySelector(`a[data-section="${targetId}"], a[href="#${targetId}"]`);
+                        if (menuLink) {
+                            menuLink.classList.add('active');
+                        }
                         
                         // Показать секцию
                         document.querySelectorAll('.section').forEach(section => {
@@ -1853,7 +1987,7 @@
                 
                 if (currentScroll > 100) {
                     header.classList.add('scrolled');
-                    if (currentScroll > lastScroll) {
+                    if (currentScroll > lastScroll && currentScroll > 200) {
                         header.style.transform = 'translateY(-100%)';
                     } else {
                         header.style.transform = 'translateY(0)';
@@ -1867,7 +2001,7 @@
                 
                 // Кнопка наверх
                 const scrollBtn = document.getElementById('scrollToTop');
-                scrollBtn.style.display = window.scrollY > 500 ? 'flex' : 'none';
+                scrollBtn.style.display = window.scrollY > 600 ? 'flex' : 'none';
             });
             
             // Кнопка наверх
@@ -1922,12 +2056,6 @@
                 });
             });
             
-            // Счетчик посещений
-            let visitCount = parseInt(localStorage.getItem('visitCount')) || 0;
-            visitCount++;
-            localStorage.setItem('visitCount', visitCount);
-            document.getElementById('visitCount').textContent = visitCount;
-            
             // Форма обратной связи
             document.getElementById('contactForm').addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -1944,22 +2072,16 @@
             
             // Скачивание основного проекта
             document.getElementById('downloadMain').addEventListener('click', function(e) {
-                showNotification('Начинается скачивание Discord Server Cloner V3...', 'success');
+                showNotification('Начинается скачивание Telegram Bot Platform...', 'success');
             });
-            
-            // Переключатель темы
-            document.getElementById('themeToggle').addEventListener('click', function() {
-                showNotification('Светлая тема в разработке', 'info');
-            });
-            
-            // Предзагрузчик
-            setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                document.getElementById('preloader').style.visibility = 'hidden';
-            }, 1500);
             
             // Инициализация активной навигации
             updateActiveNav();
+            
+            // Инициализация первой секции
+            setTimeout(() => {
+                document.querySelector('#home').classList.add('active');
+            }, 100);
         });
     </script>
 </body>
