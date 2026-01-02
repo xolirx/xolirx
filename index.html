@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="light-theme">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -495,10 +495,6 @@
             .nav-links {
                 display: none;
             }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
         }
     </style>
 </head>
@@ -656,140 +652,236 @@
     </footer>
 
     <script>
-        // DOM Elements
+        // Инициализация переменных
+        let currentTheme = 'light';
+        let typewriterInterval;
+        
+        // DOM Elements - проверяем существование элементов
         const loadingOverlay = document.getElementById('loadingOverlay');
         const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
         const navLinks = document.querySelectorAll('.nav-link');
         const homeLink = document.getElementById('homeLink');
         const pageSections = document.querySelectorAll('.page-content');
         const body = document.body;
+        const otherProjectsLink = document.getElementById('otherProjectsLink');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
         
-        // Simulate page loading
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loadingOverlay.classList.add('hidden');
-            }, 800);
-        });
-        
-        // Theme toggle functionality
-        themeToggle.addEventListener('click', () => {
-            if (body.classList.contains('light-theme')) {
-                body.classList.replace('light-theme', 'dark-theme');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.replace('dark-theme', 'light-theme');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
+        // Функция для безопасного получения элемента
+        function getElement(id) {
+            const element = document.getElementById(id);
+            if (!element) {
+                console.warn(`Element with id "${id}" not found`);
             }
-        });
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            body.classList.replace('light-theme', 'dark-theme');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
+            return element;
         }
         
-        // Navigation functionality
-        function switchPage(pageId) {
-            // Hide all pages
-            pageSections.forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Update active nav link
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.dataset.page === pageId.replace('Page', '')) {
-                    link.classList.add('active');
+        // Функция для применения темы
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-theme');
+                body.classList.remove('light-theme');
+                const themeIcon = themeToggle?.querySelector('i');
+                if (themeIcon) {
+                    themeIcon.classList.replace('fa-moon', 'fa-sun');
                 }
-            });
-            
-            // Update URL without page reload
-            const pageName = pageId.replace('Page', '');
-            const newUrl = pageName === 'home' ? 'zlafik/main' : `zlafik/${pageName}`;
-            window.history.pushState({page: pageId}, '', newUrl);
-            
-            // Scroll to top of page
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+                body.classList.add('light-theme');
+                body.classList.remove('dark-theme');
+                const themeIcon = themeToggle?.querySelector('i');
+                if (themeIcon) {
+                    themeIcon.classList.replace('fa-sun', 'fa-moon');
+                }
+            }
+            currentTheme = theme;
+            localStorage.setItem('theme', theme);
         }
         
-        // Add click event to nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = `${link.dataset.page}Page`;
-                switchPage(pageId);
-            });
+        // Загрузка страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем все элементы
+            if (!loadingOverlay) console.error('Loading overlay not found');
+            if (!themeToggle) console.error('Theme toggle not found');
+            
+            // Загружаем сохраненную тему
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else {
+                // Проверяем предпочтения системы
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyTheme(prefersDark ? 'dark' : 'light');
+            }
+            
+            // Симуляция загрузки
+            setTimeout(() => {
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
+            }, 800);
+            
+            // Инициализация typewriter эффекта
+            initTypewriter();
+            
+            // Инициализация навигации
+            initNavigation();
+            
+            // Инициализация обработчиков событий
+            initEventListeners();
+            
+            // Инициализация истории браузера
+            initHistory();
         });
         
-        // Home logo link
-        homeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchPage('homePage');
-        });
-        
-        // Other projects link
-        document.getElementById('otherProjectsLink').addEventListener('click', (e) => {
-            e.preventDefault();
-            switchPage('projectsPage');
-        });
-        
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', (e) => {
-            // Default to home page if no state
-            const pageId = e.state?.page || 'homePage';
-            switchPage(pageId);
-        });
-        
-        // Typewriter effect
-        function typeWriterEffect() {
-            const typewriter = document.querySelector('.typewriter');
+        // Инициализация typewriter эффекта
+        function initTypewriter() {
+            const typewriterElement = document.querySelector('.typewriter');
+            if (!typewriterElement) return;
+            
             const text = "developer";
             let i = 0;
-            typewriter.innerHTML = '';
+            let isDeleting = false;
             
             function type() {
-                if (i < text.length) {
-                    typewriter.innerHTML += text.charAt(i);
+                if (!typewriterElement) return;
+                
+                if (!isDeleting && i < text.length) {
+                    typewriterElement.textContent = text.substring(0, i + 1);
                     i++;
-                    setTimeout(type, 100);
+                } else if (isDeleting && i > 0) {
+                    typewriterElement.textContent = text.substring(0, i - 1);
+                    i--;
+                }
+                
+                // Переключаем режим
+                if (i === text.length) {
+                    isDeleting = true;
+                    setTimeout(type, 2000); // Пауза перед удалением
+                } else if (i === 0 && isDeleting) {
+                    isDeleting = false;
+                    setTimeout(type, 500); // Пауза перед новым циклом
                 } else {
-                    setTimeout(() => {
-                        typewriter.innerHTML = '';
-                        i = 0;
-                        setTimeout(type, 500);
-                    }, 2000);
+                    setTimeout(type, isDeleting ? 50 : 100); // Скорость удаления/печати
                 }
             }
             
-            type();
+            // Запускаем анимацию
+            setTimeout(type, 1000);
         }
         
-        // Initialize typewriter effect after page loads
-        setTimeout(typeWriterEffect, 1000);
-        
-        // Add smooth scrolling to scroll indicator
-        document.querySelector('.scroll-indicator').addEventListener('click', () => {
-            document.getElementById('projectsPage').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        // Blur effect on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.backdropFilter = 'blur(15px)';
-                header.style.webkitBackdropFilter = 'blur(15px)';
-            } else {
-                header.style.backdropFilter = 'blur(10px)';
-                header.style.webkitBackdropFilter = 'blur(10px)';
+        // Инициализация навигации
+        function initNavigation() {
+            // Обработка кликов по навигации
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page') + 'Page';
+                    switchPage(pageId);
+                });
+            });
+            
+            // Обработка клика по логотипу
+            if (homeLink) {
+                homeLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    switchPage('homePage');
+                });
             }
-        });
+            
+            // Обработка клика по ссылке "другие проекты"
+            if (otherProjectsLink) {
+                otherProjectsLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    switchPage('projectsPage');
+                });
+            }
+            
+            // Обработка клика по индикатору прокрутки
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function() {
+                    const projectsPage = getElement('projectsPage');
+                    if (projectsPage) {
+                        projectsPage.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        }
+        
+        // Инициализация обработчиков событий
+        function initEventListeners() {
+            // Переключение темы
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                });
+            }
+            
+            // Эффект блюра при скролле
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (header) {
+                    if (window.scrollY > 50) {
+                        header.style.backdropFilter = 'blur(15px)';
+                        header.style.webkitBackdropFilter = 'blur(15px)';
+                    } else {
+                        header.style.backdropFilter = 'blur(10px)';
+                        header.style.webkitBackdropFilter = 'blur(10px)';
+                    }
+                }
+            });
+            
+            // Обработка кнопок браузера назад/вперед
+            window.addEventListener('popstate', function(e) {
+                const pageId = e.state?.page || 'homePage';
+                switchPage(pageId);
+            });
+        }
+        
+        // Инициализация истории браузера
+        function initHistory() {
+            // Устанавливаем начальное состояние
+            history.replaceState({ page: 'homePage' }, '', 'zlafik/main');
+        }
+        
+        // Переключение страниц
+        function switchPage(pageId) {
+            // Скрываем все страницы
+            pageSections.forEach(page => {
+                if (page) {
+                    page.classList.remove('active');
+                }
+            });
+            
+            // Показываем выбранную страницу
+            const targetPage = getElement(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Обновляем активную ссылку в навигации
+            navLinks.forEach(link => {
+                if (link) {
+                    link.classList.remove('active');
+                    const pageName = pageId.replace('Page', '');
+                    if (link.getAttribute('data-page') === pageName) {
+                        link.classList.add('active');
+                    }
+                }
+            });
+            
+            // Обновляем URL
+            const pageName = pageId.replace('Page', '');
+            const newUrl = pageName === 'home' ? 'zlafik/main' : `zlafik/${pageName}`;
+            
+            try {
+                history.pushState({ page: pageId }, '', newUrl);
+            } catch (e) {
+                console.warn('History API error:', e);
+            }
+            
+            // Прокрутка наверх
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </body>
-                            </html>
+    </html>
