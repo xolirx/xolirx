@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zlafik - разработчик плагинов</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -788,8 +786,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
             createSnow();
-            initNavigation();
             initTypewriter();
+            handleRouting();
+            initEventListeners();
             
             function createParticles() {
                 const container = document.getElementById('particles');
@@ -885,72 +884,49 @@
                 document.head.appendChild(style);
             }
             
-            function initNavigation() {
-                const navLinks = document.querySelectorAll('.nav-link');
-                const homeLink = document.getElementById('homeLink');
-                const otherProjectsLink = document.getElementById('otherProjectsLink');
-                const scrollToProjects = document.getElementById('scrollToProjects');
-                const pageSections = document.querySelectorAll('.page-content');
+            function handleRouting() {
+                const path = window.location.pathname;
                 
-                function switchPage(pageId) {
-                    pageSections.forEach(page => {
-                        page.classList.remove('active');
-                    });
-                    
-                    const targetPage = document.getElementById(pageId);
-                    if (targetPage) {
-                        targetPage.classList.add('active');
-                    }
-                    
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        const pageName = pageId.replace('Page', '');
-                        if (link.getAttribute('data-page') === pageName) {
-                            link.classList.add('active');
-                        }
-                    });
-                    
-                    const pageName = pageId.replace('Page', '');
-                    const newUrl = pageName === 'home' ? 'zlafik/main' : `zlafik/${pageName}`;
-                    history.pushState({ page: pageId }, '', newUrl);
-                    
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                let targetPage = 'homePage';
+                
+                if (path.includes('/projects') || path.includes('/proekt')) {
+                    targetPage = 'projectsPage';
+                } else if (path.includes('/contact')) {
+                    targetPage = 'contactPage';
+                }
+                
+                switchPage(targetPage);
+            }
+            
+            function switchPage(pageId) {
+                const pageSections = document.querySelectorAll('.page-content');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                pageSections.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
                 }
                 
                 navLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const pageId = this.getAttribute('data-page') + 'Page';
-                        switchPage(pageId);
-                    });
+                    link.classList.remove('active');
+                    const pageName = pageId.replace('Page', '');
+                    if (link.getAttribute('data-page') === pageName) {
+                        link.classList.add('active');
+                    }
                 });
                 
-                if (homeLink) {
-                    homeLink.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        switchPage('homePage');
-                    });
+                const pageName = pageId.replace('Page', '');
+                const newUrl = pageName === 'home' ? '/' : `/${pageName}`;
+                
+                if (window.location.pathname !== newUrl) {
+                    window.history.pushState({ page: pageId }, '', newUrl);
                 }
                 
-                if (otherProjectsLink) {
-                    otherProjectsLink.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        switchPage('projectsPage');
-                    });
-                }
-                
-                if (scrollToProjects) {
-                    scrollToProjects.addEventListener('click', function() {
-                        switchPage('projectsPage');
-                    });
-                }
-                
-                window.addEventListener('popstate', function(e) {
-                    const pageId = e.state?.page || 'homePage';
-                    switchPage(pageId);
-                });
-                
-                history.replaceState({ page: 'homePage' }, '', 'zlafik/main');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
             
             function initTypewriter() {
@@ -988,19 +964,58 @@
                 setTimeout(type, 1000);
             }
             
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                if (header) {
-                    if (window.scrollY > 50) {
-                        header.style.backdropFilter = 'blur(20px)';
-                        header.style.webkitBackdropFilter = 'blur(20px)';
-                    } else {
-                        header.style.backdropFilter = 'blur(15px)';
-                        header.style.webkitBackdropFilter = 'blur(15px)';
-                    }
+            function initEventListeners() {
+                const navLinks = document.querySelectorAll('.nav-link');
+                const homeLink = document.getElementById('homeLink');
+                const otherProjectsLink = document.getElementById('otherProjectsLink');
+                const scrollToProjects = document.getElementById('scrollToProjects');
+                
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const pageId = this.getAttribute('data-page') + 'Page';
+                        switchPage(pageId);
+                    });
+                });
+                
+                if (homeLink) {
+                    homeLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        switchPage('homePage');
+                    });
                 }
-            });
+                
+                if (otherProjectsLink) {
+                    otherProjectsLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        switchPage('projectsPage');
+                    });
+                }
+                
+                if (scrollToProjects) {
+                    scrollToProjects.addEventListener('click', function() {
+                        switchPage('projectsPage');
+                    });
+                }
+                
+                window.addEventListener('popstate', function() {
+                    handleRouting();
+                });
+                
+                window.addEventListener('scroll', function() {
+                    const header = document.querySelector('header');
+                    if (header) {
+                        if (window.scrollY > 50) {
+                            header.style.backdropFilter = 'blur(20px)';
+                            header.style.webkitBackdropFilter = 'blur(20px)';
+                        } else {
+                            header.style.backdropFilter = 'blur(15px)';
+                            header.style.webkitBackdropFilter = 'blur(15px)';
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>
-    </html>
+</html>
