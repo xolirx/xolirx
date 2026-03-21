@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>xolirx • Разработчик</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -383,7 +383,7 @@
         .image-placeholder {
             width: 100%;
             height: 450px;
-            background: var(--bg-card);
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
             border: 1px solid var(--border);
             border-radius: 30px;
             display: flex;
@@ -403,13 +403,13 @@
         .image-placeholder i {
             font-size: 8rem;
             color: var(--accent-secondary);
-            opacity: 0.3;
-            animation: rotate 20s infinite linear;
+            opacity: 0.5;
+            animation: floatAvatar 6s infinite ease-in-out;
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         .bio-content {
@@ -521,10 +521,10 @@
         }
 
         .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -537,11 +537,9 @@
             position: relative;
             opacity: 0;
             transform: translateY(40px);
-            animation: cardRise 0.8s forwards;
+            animation: cardRise 0.8s 0.2s forwards;
+            width: 100%;
         }
-
-        .project-card:nth-child(1) { animation-delay: 0.2s; }
-        .project-card:nth-child(2) { animation-delay: 0.4s; }
 
         @keyframes cardRise {
             to {
@@ -558,7 +556,7 @@
 
         .project-header {
             height: 200px;
-            background: var(--bg-secondary);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -601,6 +599,23 @@
             line-height: 1.7;
             font-size: 1rem;
             font-weight: 300;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-secondary);
         }
 
         .project-links {
@@ -799,7 +814,6 @@
             .typewriter { font-size: 2rem; }
             .typewriter-container { height: 70px; }
             .section-title { font-size: 3rem; }
-            .projects-grid { grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); }
         }
 
         @media (max-width: 768px) {
@@ -807,7 +821,6 @@
             .typewriter { font-size: 1.5rem; }
             .typewriter-container { height: 60px; }
             .section-title { font-size: 2.5rem; }
-            .projects-grid { grid-template-columns: 1fr; }
             .nav-links { gap: 15px; }
             .hero-description { font-size: 1.1rem; }
             .hero-subtitle { font-size: 1rem; }
@@ -815,7 +828,7 @@
             .contact-grid { grid-template-columns: 1fr; }
             .bio-container { flex-direction: column; gap: 40px; }
             .bio-stats { grid-template-columns: repeat(2, 1fr); }
-            .scroll-hint { bottom: 20px; }
+            .projects-grid { max-width: 100%; padding: 0 20px; }
         }
 
         @media (max-width: 480px) {
@@ -834,7 +847,6 @@
             .bio-stats { grid-template-columns: 1fr; }
             .image-placeholder { height: 300px; }
             .footer-logo { font-size: 1.8rem; }
-            .scroll-hint { bottom: 15px; }
         }
     </style>
 </head>
@@ -855,7 +867,6 @@
     </header>
 
     <div class="main-content">
-        <!-- Главная -->
         <div id="home" class="tab-pane active">
             <div class="hero">
                 <div class="hero-content">
@@ -863,58 +874,61 @@
                     <div class="typewriter-container">
                         <div class="typewriter" id="typewriter"></div>
                     </div>
-                    <div class="hero-subtitle">Разработчик & Минималист</div>
+                    <div class="hero-subtitle">Разработчик • Минималист • Создаю инструменты</div>
                     <p class="hero-description">
-                        Специализируюсь на создании эффективных и минималистичных решений для FunPay Cardinal, 
-                        веб-разработке и создании Telegram ботов. Каждый проект — баланс эстетики и функциональности.
+                        Специализируюсь на создании эффективных и минималистичных решений для Discord, 
+                        веб-разработке и автоматизации. Каждый проект — баланс эстетики и функциональности.
                     </p>
                     <div class="specialization">
-                        <div class="spec-item">FunPay Cardinal</div>
+                        <div class="spec-item">Discord Tools</div>
                         <div class="spec-item">Веб-разработка</div>
                         <div class="spec-item">Telegram боты</div>
                         <div class="spec-item">UI/UX Дизайн</div>
                     </div>
                 </div>
+                <div class="scroll-hint" onclick="switchTab('bio')">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Обо мне</span>
+                </div>
             </div>
         </div>
 
-        <!-- Био -->
         <div id="bio" class="tab-pane">
             <div class="page-section">
                 <div class="container">
                     <div class="bio-container">
                         <div class="bio-image">
                             <div class="image-placeholder">
-                                <i class="fas fa-user-astronaut"></i>
+                                <i class="fas fa-code"></i>
                             </div>
                         </div>
                         <div class="bio-content">
                             <h2 class="bio-title">О разработчике</h2>
                             <p class="bio-text">
                                 Привет, я xolirx — разработчик с фокусом на создании минималистичных и высокопроизводительных решений. 
-                                Моя философия — простота, эффективность и элегантность кода.
+                                Моя философия — простота, эффективность и элегантность кода. Верю, что лучшие интерфейсы — те, которые не отвлекают от задачи.
                             </p>
                             <p class="bio-text">
-                                Специализируюсь на разработке плагинов для FunPay Cardinal, создании Telegram ботов 
-                                и веб-приложений. Каждый мой проект — это тщательно продуманное решение, 
-                                где каждая деталь имеет значение.
+                                Основное направление — инструменты для Discord: клонирование серверов, управление структурами, автоматизация. 
+                                Каждый проект проходит через тщательное тестирование и оптимизацию, чтобы быть максимально надежным.
                             </p>
                             <p class="bio-text">
-                                В работе ценю чистый код, производительность и минималистичный дизайн. 
-                                Верю, что лучшие решения — самые простые.
+                                Помимо Discord, занимаюсь веб-разработкой и созданием Telegram ботов. 
+                                В работе ценю чистый код, производительность и внимание к деталям. 
+                                Убежден, что хороший инструмент должен решать задачу быстро и без лишних сложностей.
                             </p>
                             <div class="bio-stats">
                                 <div class="stat-item">
-                                    <div class="stat-number">2</div>
-                                    <div class="stat-label">Проекта</div>
-                                </div>
-                                <div class="stat-item">
-                                    <div class="stat-number">3+</div>
-                                    <div class="stat-label">Года опыта</div>
+                                    <div class="stat-number">1</div>
+                                    <div class="stat-label">Активный проект</div>
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-number">100%</div>
-                                    <div class="stat-label">Качество</div>
+                                    <div class="stat-label">Open Source</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">24/7</div>
+                                    <div class="stat-label">Поддержка</div>
                                 </div>
                             </div>
                         </div>
@@ -923,11 +937,10 @@
             </div>
         </div>
 
-        <!-- Проекты -->
         <div id="projects" class="tab-pane">
             <div class="page-section">
                 <div class="container">
-                    <h2 class="section-title">Избранные проекты</h2>
+                    <h2 class="section-title">Мои проекты</h2>
                     <div class="projects-grid">
                         <div class="project-card">
                             <div class="project-header">
@@ -935,40 +948,25 @@
                             </div>
                             <div class="project-content">
                                 <h3 class="project-title">
-                                    <i class="fas fa-code"></i> Discord Server Cloner
+                                    <i class="fas fa-copy"></i> Discord Server Cloner Pro
                                 </h3>
                                 <p class="project-description">
-                                    Мощный инструмент для клонирования Discord серверов с сохранением структуры каналов, ролей и настроек. 
-                                    Минималистичный интерфейс, максимальная производительность.
+                                    Профессиональный веб-инструмент для полного клонирования структуры Discord серверов. 
+                                    Копирует названия, иконки, все роли с правами, категории и каналы. 
+                                    Минималистичный интерфейс, работа в фоне, поддержка PWA.
                                 </p>
-                                <div class="project-links">
-                                    <a href="https://github.com/qtiq0/discord-server-cloner" target="_blank" class="btn btn-primary">
-                                        <i class="fab fa-github"></i> GitHub
-                                    </a>
-                                    <a href="https://github.com/qtiq0/discord-server-cloner/archive/refs/heads/main.zip" class="btn btn-secondary">
-                                        <i class="fas fa-download"></i> Скачать
-                                    </a>
+                                <div class="project-tech">
+                                    <span class="tech-tag">Discord API</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">PWA</span>
+                                    <span class="tech-tag">Service Worker</span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="project-card">
-                            <div class="project-header">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <div class="project-content">
-                                <h3 class="project-title">
-                                    <i class="fas fa-bolt"></i> Playerok Checker
-                                </h3>
-                                <p class="project-description">
-                                    Высокопроизводительный инструмент для проверки аккаунтов с поддержкой мультипоточности. 
-                                    Оптимизированный алгоритм работы, минималистичный интерфейс.
-                                </p>
                                 <div class="project-links">
-                                    <a href="https://github.com/qtiq0/Playerok-Checker" target="_blank" class="btn btn-primary">
+                                    <a href="https://github.com/xolirx/discord-server-cloner" target="_blank" class="btn btn-primary">
                                         <i class="fab fa-github"></i> GitHub
                                     </a>
-                                    <a href="https://github.com/qtiq0/Playerok-Checker/archive/refs/heads/main.zip" class="btn btn-secondary">
-                                        <i class="fas fa-download"></i> Скачать
+                                    <a href="https://xolirx.github.io/DiscordCloner/" target="_blank" class="btn btn-secondary">
+                                        <i class="fas fa-external-link-alt"></i> Демо
                                     </a>
                                 </div>
                             </div>
@@ -978,11 +976,10 @@
             </div>
         </div>
 
-        <!-- Связь -->
         <div id="contact" class="tab-pane">
             <div class="page-section">
                 <div class="container">
-                    <h2 class="section-title">Связь</h2>
+                    <h2 class="section-title">Связаться</h2>
                     <div class="contact-grid">
                         <div class="contact-card">
                             <div class="contact-icon">
@@ -990,10 +987,10 @@
                             </div>
                             <h3 class="contact-title">Telegram</h3>
                             <p class="contact-text">
-                                Основной канал связи для обсуждения проектов и сотрудничества. 
-                                Отвечаю в рабочее время в течение нескольких часов.
+                                Основной канал связи. Быстро отвечаю на вопросы о проектах, 
+                                сотрудничестве и новых идеях. Пишите по делу.
                             </p>
-                            <a href="https://t.me/xolirxx" target="_blank" class="contact-link">@xolirxx</a>
+                            <a href="https://t.me/xolirx" target="_blank" class="contact-link">@xolirx</a>
                         </div>
                         <div class="contact-card">
                             <div class="contact-icon">
@@ -1001,8 +998,8 @@
                             </div>
                             <h3 class="contact-title">GitHub</h3>
                             <p class="contact-text">
-                                Портфолио с открытыми проектами и исходным кодом. 
-                                Активно развиваю open-source проекты.
+                                Все проекты с открытым исходным кодом. 
+                                Ставьте звезды, форкайте, предлагайте улучшения через Issues.
                             </p>
                             <a href="https://github.com/xolirx" target="_blank" class="contact-link">xolirx</a>
                         </div>
@@ -1016,8 +1013,8 @@
         <div class="container">
             <div class="footer-logo" id="footerHomeLink">xolirx</div>
             <p class="footer-text">
-                Разработка минималистичных и эффективных решений. 
-                FunPay Cardinal • Веб-разработка • Telegram боты • UI/UX Дизайн
+                Создаю инструменты, которые решают задачи. 
+                Discord • Веб-разработка • Минимализм • Open Source
             </p>
             <div class="social-links">
                 <a href="https://t.me/xolirx" target="_blank" class="social-link">
@@ -1028,7 +1025,7 @@
                 </a>
             </div>
             <p style="color: var(--text-secondary); font-size: 0.9rem; font-family: 'JetBrains Mono', monospace;">
-                © 2026 xolirx • Минимализм и эффективность
+                © 2026 xolirx • Код — это искусство
             </p>
         </div>
     </footer>
@@ -1036,7 +1033,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const typewriterElement = document.getElementById('typewriter');
-            const texts = ["developer", "coder", "minimalist", "problem solver", "designer", "architect"];
+            const texts = ["developer", "minimalist", "tool maker", "problem solver", "discord api", "open source"];
             let textIndex = 0;
             let charIndex = 0;
             let isDeleting = false;
@@ -1071,34 +1068,35 @@
 
             setTimeout(typeEffect, 1000);
 
-            // Табы
-            const navLinks = document.querySelectorAll('.nav-link');
-            const tabPanes = document.querySelectorAll('.tab-pane');
-            const homeLink = document.getElementById('homeLink');
-            const footerHomeLink = document.getElementById('footerHomeLink');
-
             function switchTab(tabId) {
-                // Скрываем все табы
+                const tabPanes = document.querySelectorAll('.tab-pane');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
                 tabPanes.forEach(pane => {
                     pane.classList.remove('active');
                 });
                 
-                // Показываем выбранный таб
                 const activePane = document.getElementById(tabId);
                 if (activePane) {
                     activePane.classList.add('active');
                 }
                 
-                // Обновляем активное состояние навигации
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('data-tab') === tabId) {
                         link.classList.add('active');
                     }
                 });
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Обработчики для навигации
+            window.switchTab = switchTab;
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const homeLink = document.getElementById('homeLink');
+            const footerHomeLink = document.getElementById('footerHomeLink');
+
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1107,7 +1105,6 @@
                 });
             });
 
-            // Обработчик для логотипа
             if (homeLink) {
                 homeLink.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1122,7 +1119,6 @@
                 });
             }
 
-            // Эффекты при наведении
             const cards = document.querySelectorAll('.project-card, .contact-card, .spec-item');
             
             cards.forEach(card => {
@@ -1134,7 +1130,6 @@
                 });
             });
 
-            // Обновление header при скролле
             const header = document.querySelector('header');
             
             window.addEventListener('scroll', function() {
