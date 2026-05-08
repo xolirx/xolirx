@@ -1,92 +1,103 @@
-# BIO BY ZLAFIK | Портфолио разработчика
+<div align="center">
 
-Адаптивное портфолио-сайт с современным дизайном и фокусом на один ключевой проект.
+<img src="https://i.ibb.co/HTb7KChr/Katana.jpg" width="100%">
 
-## ✨ Особенности сайта
+<br><br>
 
-- **Современный дизайн** - Неоновая тема с градиентами и анимациями
-- **Полная адаптивность** - Оптимизировано для мобильных устройств
-- **Анимированный фон** - Красивый снегопад на заднем плане
-- **Быстрая загрузка** - Минималистичный код без лишних зависимостей
-- **Плавные анимации** - CSS-анимации для плавного взаимодействия
+# ⚡ XolirX
 
-## 🚀 Основной проект
+### Modern VPN • Cybersecurity • Infrastructure
 
-### Discord Server Cloner V3
-**Мощный инструмент для полного клонирования Discord серверов**
-- Полное копирование структуры сервера
-- Сохранение иерархии ролей и каналов
-- Стабильная работа с обработкой ошибок
-- Поддержка всех типов каналов
+<br>
 
-**Технологии:** Python, Discord API, AsyncIO, WebSocket, aiohttp
+<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&color=FFFFFF&center=true&vCenter=true&width=900&lines=Modern+VPN+Infrastructure;Cybersecurity+Developer;Secure+Network+Systems;XRay+%7C+VLESS+%7C+Cloudflare">
 
-[Открыть репозиторий проекта →](https://github.com/zlafik1/discord-server-cloner)
+<br><br>
 
-## 📋 Структура сайта
+<img src="https://img.shields.io/github/followers/xolirx?style=for-the-badge&color=black">
+<img src="https://img.shields.io/github/stars/xolirx?style=for-the-badge&color=111111">
+<img src="https://img.shields.io/badge/STATUS-ONLINE-black?style=for-the-badge">
+<img src="https://img.shields.io/badge/FOCUS-CYBERSECURITY-black?style=for-the-badge">
 
-### Вкладки:
-1. **Главная** - Основная информация и принципы работы
-2. **Проекты** - Детали основного проекта Discord Server Cloner V3
-3. **Контакты** - Способы связи
+<br><br>
 
-### Контент:
-- **Информация о разработчике** (zlafik | Рома)
-- **Принципы работы** (6 ключевых принципов)
-- **Проектная документация** с технологиями и фичами
-- **Контактные данные** для связи
+<img src="https://skillicons.dev/icons?i=python,nodejs,react,linux,docker,cloudflare,github,vscode" />
 
-## 🛠 Технологии
+</div>
 
-- **HTML5** - Семантическая разметка
-- **CSS3** - Современные стили, Grid, Flexbox, анимации
-- **JavaScript (Vanilla)** - Нативная логика без фреймворков
-- **Font Awesome** - Иконки
-- **Google Fonts** - Шрифты (Inter, Orbitron, JetBrains Mono)
+---
 
-## 📱 Адаптивность
+# 🖤 About Me
 
-Сайт оптимизирован для всех устройств:
-- **Десктопы** - Полноценный интерфейс
-- **Планшеты** - Адаптированные сетки
-- **Мобильные** - Гамбургер-меню, Touch-оптимизация
-
-## 🎨 Дизайн-система
-
-### Цветовая палитра:
-- `#0a0a0a` - Основной фон
-- `#1a1a1a` - Карточки
-- `#ff003c` - Акцентный красный
-- `#0066ff` - Акцентный синий
-- `#8a2be2` - Акцентный фиолетовый
-- `#ffffff` - Основной текст
-- `#b0b0b0` - Вторичный текст
-
-### Анимации:
-- Плавный снегопад на фоне
-- Градиентные анимации заголовков
-- Плавные переходы между вкладками
-- Hover-эффекты для интерактивных элементов
-
-## 📞 Контакты
-
-- **Telegram (ЛС)**: [@zlafik](https://t.me/zlafik)
-- **Discord**: zlafik
-- **Email**: fendihan7765@gmail.com
-- **GitHub**: [github.com/zlafik1](https://github.com/zlafik1)
-
-## 🚀 Установка и запуск
-
-### Вариант 1: Прямой запуск
-1. Скачайте файлы проекта
-2. Откройте `index.html` в браузере
-
-### Вариант 2: Через локальный сервер
 ```bash
-# Установите http-server
-npm install -g http-server
+Developer: XolirX
+Focus: VPN Infrastructure & Cybersecurity
+Stack: Python / Node.js / React
+Tools: XRay / VLESS / Cloudflare
+Style: Minimalistic Dark UI
+```
 
-# Запустите сервер
-http-server -p 8080
+---
 
-# Откройте в браузере: http://localhost:8080
+# ⚡ Current Projects
+
+- 🚀 Modern VPN Infrastructure
+- 🔒 Secure Network Systems
+- 🌍 High Speed Routing
+- ☁ Cloudflare Solutions
+- ⚡ XRay / VLESS Technologies
+
+---
+
+# 📊 GitHub Statistics
+
+<div align="center">
+
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=xolirx&show_icons=true&theme=github_dark&hide_border=true"/>
+
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=xolirx&layout=compact&theme=github_dark&hide_border=true"/>
+
+</div>
+
+---
+
+# 🔥 Activity
+
+<div align="center">
+
+<img src="https://streak-stats.demolab.com?user=xolirx&theme=github-dark-blue&hide_border=true">
+
+</div>
+
+---
+
+# 🌑 Technologies
+
+<div align="center">
+
+<img src="https://skillicons.dev/icons?i=python,js,ts,nodejs,react,nextjs,linux,docker,cloudflare,git,github,vscode" />
+
+</div>
+
+---
+
+# 🌐 Links
+
+<div align="center">
+
+[Website](https://xolirx-vpn.vercel.app/about) •
+[GitHub](https://github.com/xolirx)
+
+</div>
+
+---
+
+<div align="center">
+
+# ⚡ XolirX
+
+### Secure • Fast • Modern
+
+🖤
+
+</div>
