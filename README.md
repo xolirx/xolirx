@@ -49,6 +49,18 @@ Style: Minimalistic Dark UI
 
 ---
 
+# 📦 Featured Projects
+
+<!-- Секция с реальными проектами с твоего GitHub -->
+<div align="center">
+
+[![Discord Server Cloner](https://github-readme-stats.vercel.app/api/pin/?username=xolirx&repo=discord-server-cloner&theme=github_dark&hide_border=true)](https://github.com/xolirx/discord-server-cloner)
+[![XOLIRX-VPN](https://github-readme-stats.vercel.app/api/pin/?username=xolirx&repo=XOLIRX-VPN.&theme=github_dark&hide_border=true)](https://github.com/xolirx/XOLIRX-VPN.)
+
+</div>
+
+---
+
 # 📊 GitHub Statistics
 
 <div align="center">
@@ -101,3 +113,4 @@ Style: Minimalistic Dark UI
 🖤
 
 </div>
+
