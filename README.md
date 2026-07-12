@@ -4,13 +4,7 @@
 
 <br><br>
 
-# ⚡ XOLIRX
-
-### `Современный VPN • Кибербезопасность • Инфраструктура`
-
-<br>
-
-<img src="assets/ziooopo.gif" width="100%" alt="Баннер">
+<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&color=FFFFFF&center=true&vCenter=true&width=800&lines=VPN+инфраструктура;Кибербезопасность;Безопасные+сети;XRay+%7C+VLESS+%7C+Cloudflare" alt="Анимированный текст" />
 
 <br>
 
@@ -45,17 +39,5 @@
 
 [![Сайт](https://img.shields.io/badge/САЙТ-00D4FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://xolirx-vpn.vercel.app/about)
 [![GitHub](https://img.shields.io/badge/GITHUB-FFFFFF?style=for-the-badge&logo=github&logoColor=black)](https://github.com/xolirx)
-
-</div>
-
----
-
-<div align="center">
-
-# ⚡ XolirX
-
-### `Быстро • Безопасно • Современно`
-
-🖤
 
 </div>
