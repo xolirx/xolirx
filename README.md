@@ -4,7 +4,7 @@
 
 <br><br>
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&color=FFFFFF&center=true&vCenter=true&width=800&lines=VPN+инфраструктура;Кибербезопасность;Безопасные+сети;XRay+%7C+VLESS+%7C+Cloudflare" alt="Анимированный текст" />
+<img src="assets/ziooopo.gif" width="100%" alt="Баннер">
 
 <br>
 
