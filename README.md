@@ -1,10 +1,4 @@
-<div align="center">
 
-<img src="https://i.ibb.co/7xc4Wv1S/ziooopo.gif" width="100%" alt="Баннер">
-
-<br><br>
-
-<img src="assets/ziooopo.gif" width="100%" alt="Баннер">
 
 <br>
 
