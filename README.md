@@ -1,22 +1,22 @@
 <div align="center">
 
-<img src="https://i.ibb.co/HTb7KChr/Katana.jpg" width="100%" alt="Banner">
+<img src="https://i.ibb.co/7xc4Wv1S/ziooopo.gif" width="100%" alt="Баннер">
 
 <br><br>
 
 # ⚡ XOLIRX
 
-### `Modern VPN • Cybersecurity • Infrastructure`
+### `Современный VPN • Кибербезопасность • Инфраструктура`
 
 <br>
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&color=FFFFFF&center=true&vCenter=true&width=800&lines=VPN+Infrastructure;Cybersecurity;Secure+Networks;XRay+%7C+VLESS+%7C+Cloudflare" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&size=28&duration=3000&color=FFFFFF&center=true&vCenter=true&width=800&lines=VPN+инфраструктура;Кибербезопасность;Безопасные+сети;XRay+%7C+VLESS+%7C+Cloudflare" alt="Анимированный текст" />
 
 <br>
 
-![GitHub followers](https://img.shields.io/badge/FOLLOWERS-1K+-black?style=flat-square&color=111)
-![GitHub stars](https://img.shields.io/badge/STARS-500+-black?style=flat-square&color=111)
-![Status](https://img.shields.io/badge/STATUS-ONLINE-brightgreen?style=flat-square)
+![Подписчики](https://img.shields.io/badge/ПОДПИСЧИКИ-1K+-black?style=flat-square&color=111)
+![Звёзды](https://img.shields.io/badge/ЗВЁЗДЫ-500+-black?style=flat-square&color=111)
+![Статус](https://img.shields.io/badge/СТАТУС-ОНЛАЙН-brightgreen?style=flat-square)
 
 <br>
 
@@ -26,19 +26,19 @@
 
 ---
 
-## 🖤 About
+## 🖤 Обо мне
 
 ```yaml
-Developer: XolirX
-Focus: VPN Infrastructure & Cybersecurity
-Stack: Python / Node.js / React
-Tools: XRay / VLESS / Cloudflare / Docker / Linux
-Style: Minimalistic Dark UI
+Разработчик: XolirX
+Фокус: VPN инфраструктура и кибербезопасность
+Стек: Python / Node.js / React
+Инструменты: XRay / VLESS / Cloudflare / Docker / Linux
+Стиль: Минималистичный тёмный интерфейс
 ```
 
 ---
 
-## ⚡ Tech Stack
+## ⚡ Технологии
 
 <div align="center">
 
@@ -66,7 +66,7 @@ Style: Minimalistic Dark UI
 
 ---
 
-## 📊 GitHub Stats
+## 📊 Статистика GitHub
 
 <div align="center">
 
@@ -77,21 +77,21 @@ Style: Minimalistic Dark UI
 
 ---
 
-## 📈 Activity
+## 📈 Активность
 
 <div align="center">
 
-[![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=xolirx&bg_color=0D1117&color=00D4FF&line=FF6B6B&point=FFFFFF&area=true&area_color=00D4FF&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
+[![График активности](https://github-readme-activity-graph.vercel.app/graph?username=xolirx&bg_color=0D1117&color=00D4FF&line=FF6B6B&point=FFFFFF&area=true&area_color=00D4FF&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
 
 </div>
 
 ---
 
-## 🌐 Links
+## 🌐 Ссылки
 
 <div align="center">
 
-[![Website](https://img.shields.io/badge/WEBSITE-00D4FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://xolirx-vpn.vercel.app/about)
+[![Сайт](https://img.shields.io/badge/САЙТ-00D4FF?style=for-the-badge&logo=google-chrome&logoColor=white)](https://xolirx-vpn.vercel.app/about)
 [![GitHub](https://img.shields.io/badge/GITHUB-FFFFFF?style=for-the-badge&logo=github&logoColor=black)](https://github.com/xolirx)
 
 </div>
@@ -102,7 +102,7 @@ Style: Minimalistic Dark UI
 
 # ⚡ XolirX
 
-### `Secure • Fast • Modern`
+### `Быстро • Безопасно • Современно`
 
 🖤
 
