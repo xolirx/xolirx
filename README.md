@@ -55,7 +55,7 @@ style: минимализм, надёжность, тёмная тема
 
 | Проект | Описание | Статус |
 | ------ | -------- | ------ |
-| **GhostShield** | VPN-бот для Telegram: профили, серверы, автоматическая смена нод, админ-панель | <img src="https://img.shields.io/badge/АКТИВНО-0d1117?style=for-the-badge&logo=github&labelColor=black"> |
+| **Gothic VPN | 🖤** | VPN-бот для Telegram: профили, серверы, автоматическая смена нод, админ-панель | <img src="https://img.shields.io/badge/АКТИВНО-0d1117?style=for-the-badge&logo=github&labelColor=black"> |
 
 ### ⚡️ Что я умею
 
