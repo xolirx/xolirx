@@ -57,13 +57,4 @@ Backend / API               █████████████████�
 📊 GitHub
 <div align="center">
 
-https://github-readme-stats.vercel.app/api?username=xolirx&show_icons=true&count_private=true&hide_title=true&theme=github_dark&bg_color=00000000&rank_icon=github
-
-https://github-readme-stats.vercel.app/api/top-langs/?username=xolirx&layout=compact&theme=github_dark&bg_color=00000000
-
-https://github-profile-trophy.vercel.app/?username=xolirx&theme=onedark&row=2&column=3&margin-w=8
-
-https://github-contribution-graph.vercel.app/theme=github_dark&user=xolirx
-</div><div align="center">
-
 Код — это моя тишина.
