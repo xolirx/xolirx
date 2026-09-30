@@ -8,7 +8,6 @@
 ██╔╝ ██╗╚██████╔╝███████╗██║██║  ██║██╔╝ ██╗
 ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 ```
-
 # XOLIRX
 
 **В тени — там, где нет лишнего шума.**
@@ -28,7 +27,7 @@
 
 </div>
 
-### 🕶️ Обо мне
+### 🖥️ Обо мне
 
 ```yaml
 name: xolirx
@@ -46,46 +45,28 @@ stack:
   - Redis
   - Docker
   - Linux
-working_on:
-  - GhostShield VPN — бесплатный и быстрый VPN через Telegram-бота
 style: минимализм, надёжность, тёмная тема
-```
 
-### 🚀 Проекты
+⚡️ Что я умею
 
-| Проект | Описание | Статус |
-| ------ | -------- | ------ |
-| **Gothic VPN | 🖤** | VPN-бот для Telegram: профили, серверы, автоматическая смена нод, админ-панель | <img src="https://img.shields.io/badge/АКТИВНО-0d1117?style=for-the-badge&logo=github&labelColor=black"> |
+Автоматизация процессов     █████████████████████  95%
+Telegram-боты               ████████████████████  90%
+Backend / API               ███████████████████  85%
+Деплой и инфраструктура     ██████████████████  80%
 
-### ⚡️ Что я умею
-
-```text
-Автоматизация процессов     ████████████████████░  95%
-Telegram-боты               ███████████████████░░  90%
-Backend / API               ██████████████████░░░  85%
-Деплой и инфраструктура     █████████████████░░░░  80%
-```
-
-### 📊 GitHub
-
+📊 GitHub
 <div align="center">
 
-[![Статистика](https://github-readme-stats.vercel.app/api?username=xolirx&show_icons=true&count_private=true&hide_title=true&theme=github_dark&bg_color=00000000&rank_icon=github)](https://github.com/xolirx)
+https://github-readme-stats.vercel.app/api?username=xolirx&show_icons=true&count_private=true&hide_title=true&theme=github_dark&bg_color=00000000&rank_icon=github
 
-[![Топ языков](https://github-readme-stats.vercel.app/api/top-langs/?username=xolirx&layout=compact&theme=github_dark&bg_color=00000000)](https://github.com/xolirx)
+https://github-readme-stats.vercel.app/api/top-langs/?username=xolirx&layout=compact&theme=github_dark&bg_color=00000000
 
-[![Достижения](https://github-profile-trophy.vercel.app/?username=xolirx&theme=onedark&row=2&column=3&margin-w=8)](https://github.com/xolirx)
+https://github-profile-trophy.vercel.app/?username=xolirx&theme=onedark&row=2&column=3&margin-w=8
 
-[![Вклад](https://github-contribution-graph.vercel.app/theme=github_dark&user=xolirx)](https://github.com/xolirx)
+https://github-contribution-graph.vercel.app/theme=github_dark&user=xolirx
+</div><div align="center">
 
-</div>
+Код — это моя тишина.
 
----
-
-<div align="center">
-
-**Код — это моя тишина.**
-
-[![Telegram](https://img.shields.io/badge/Написать_мне-0d1117?style=for-the-badge&logo=telegram&logoColor=white&labelColor=black)](https://t.me/xolirx)
-
-</div>
+https://img.shields.io/badge/%D0%9D%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C_%D0%BC%D0%BD%D0%B5-0d1117?style=for-the-badge&logo=telegram&logoColor=white&labelColor=black
+</div> ```
